@@ -20,7 +20,8 @@
   "homepage": "https://github.com/vuktmt15/nodejs-f8-blog#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "express-handlebars": "^5.1.0"
+    "express-handlebars": "^5.1.0",
+    "mongoose": "^6.1.5"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
