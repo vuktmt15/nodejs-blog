@@ -1,0 +1,21 @@
+<div class="mt-16 container">
+    <h3>Update Course</h3>
+    <form method="POST" action="/courses/{{course._id}}?_method=PUT">
+        <div class="form-group">
+            <label for="name"><strong>Name</strong></label>
+            <input name="name" type="text" class="form-control" value="{{course.name}}" id="name" placeholder="Name">
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="description"><strong>Description</strong></label>
+            <textarea name="description" class="form-control"  id="description" cols="30" rows="10">{{course.description}}</textarea>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="videoId"><strong>Video Id</strong></label>
+            <input name="videoId" type="text" class="form-control" value="{{course.videoId}}" id="videoId" placeholder="Example input">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>

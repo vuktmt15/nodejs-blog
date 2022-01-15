@@ -28,9 +28,36 @@ class CourseController {
         const newCourse = new Course(dataCourse)
         newCourse.save()
             .then(() => res.redirect('/courses/'))
-            .catch(err => {
-
-            })
+            .catch(next)
+    }
+    edit(req, res, next) {
+        Course.findOne({_id: req.params.id})
+            .then(course => res.render('courses/edit', {
+                course: mongooseToObject(course)
+            }))
+            .catch(next)
+    }
+    update(req, res, next) {
+        const dataCourse = req.body
+        dataCourse.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`
+        Course.updateOne({_id: req.params.id}, dataCourse)
+            .then(() => res.redirect('/me/stored/courses'))
+            .catch(next)
+    }
+    destroy(req, res, next) {
+        Course.delete({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(next)
+    }
+    forceDestroy(req, res, next) {
+        Course.deleteOne({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(next)
+    }
+    restore(req, res, next) {
+        Course.restore({_id: req.params.id})
+            .then(() => res.redirect('back'))
+            .catch(next)
     }
 }
 

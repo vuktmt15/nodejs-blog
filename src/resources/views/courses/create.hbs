@@ -1,23 +1,21 @@
 <div class="mt-16 container">
     <h3>Create Course</h3>
-    <div class="row">
         <form method="POST" action="/courses/store">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name"><strong>Name</strong></label>
                 <input name="name" type="text" class="form-control" id="name" placeholder="Name">
             </div>
             <br>
             <div class="form-group">
-                <label for="description">Description</label>
+                <label for="description"><strong>Description</strong></label>
                 <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
             </div>
             <br>
             <div class="form-group">
-                <label for="videoId">Video Id</label>
+                <label for="videoId"><strong>Video Id</strong></label>
                 <input name="videoId" type="text" class="form-control" id="videoId" placeholder="Example input">
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Add</button>
         </form>
-    </div>
 </div>

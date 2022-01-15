@@ -1,0 +1,58 @@
+<div class="container mt-16">
+    <h3>List courses deleted</h3>
+    <div class="float-right">
+        <i class="bi bi-caret-left"></i>
+        <a href="/me/stored/courses">My courses</a>
+    </div>
+    <br>
+    <table class="table mt-16">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">CreatedAt</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each courses}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.createdAt}}</td>
+                <td>
+                    <form method="POST" action="/courses/{{this._id}}/restore?_method=PATCH">
+                        <button type="submit" class="btn btn-primary">Restore</button>
+                        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{this._id}}">Force Delete</a>
+                    </form>
+                </td>
+            </tr>
+
+            <!-- Modal delete-->
+            <div class="modal fade" id="modal-delete-{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete this course !</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Do you want to delete this course? <strong>This action can't restore !!!</strong>
+                        </div>
+                        <div class="modal-footer">
+                            <form method="POST" action="/courses/{{this._id}}/force?_method=DELETE">
+                                <button type="submit" class="btn btn-danger" >Delete</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            <td colspan="5" class="text-center">Trash courses is empty! <a href="/me/stored/courses">My courses</a></td>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
