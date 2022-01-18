@@ -1,13 +1,31 @@
-<div class="container mt-16">
+<form class="container mt-16" method="post" action="/courses/handle-multiple-courses">
     <h3>My courses</h3>
     <div class="float-right">
         <i class="bi bi-trash"></i>
-        <a href="/me/trash/courses">Trash courses</a>
+        <a href="/me/trash/courses">Trash courses ({{deletedCourses}})</a>
     </div>
     <br>
-    <table class="table mt-16">
+    <div class="mt-16 d-flex">
+        <div class="form-check" style="margin-left:16px">
+            <input type="checkbox" class="form-check-input" id="checkAll" name="checkAll">
+            <label for="checkAll" class="form-check-label">
+                Select All
+            </label>
+        </div>
+        <div class="select-action" style="margin-left:16px">
+            <select name="action" id="select-action">
+                <option value="empty">--Select Action--</option>
+                <option value="delete">Delete</option>
+            </select>
+        </div>
+        <div class="form-handle-multiple" style="margin-left:16px">
+            <button disabled id="handleMultipleCourses" class="btn btn-primary btn-sm">Action</button>
+        </div>
+    </div>
+    <table class="table mt-16" id="table-my-courses">
         <thead>
         <tr>
+            <th></th>
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">CreatedAt</th>
@@ -15,9 +33,13 @@
         </tr>
         </thead>
         <tbody>
+        <form action=""></form> <!-- Help to form of restore handle-->
         {{#each courses}}
             <tr>
-                <th scope="row">{{sum @index 1}}</th>
+                <th scope="row">
+                    <input type="checkbox" name="courseIds[]" value="{{this._id}}">
+                </th>
+                <td>{{sum @index 1}}</td>
                 <td>{{this.name}}</td>
                 <td>{{this.createdAt}}</td>
                 <td>
@@ -31,7 +53,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Delete this course !</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Delete this {{this._id}} !</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -53,4 +75,8 @@
         {{/each}}
         </tbody>
     </table>
-</div>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/handleMultipleCourseSelection.js"></script>

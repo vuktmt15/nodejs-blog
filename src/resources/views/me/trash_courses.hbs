@@ -1,13 +1,32 @@
-<div class="container mt-16">
+<form class="container mt-16" method="post" action="/courses/handle-multiple-courses">
     <h3>List courses deleted</h3>
     <div class="float-right">
         <i class="bi bi-caret-left"></i>
         <a href="/me/stored/courses">My courses</a>
     </div>
     <br>
+    <div class="mt-16 d-flex">
+        <div class="form-check" style="margin-left:16px">
+            <input type="checkbox" class="form-check-input" id="checkAll" name="checkAll">
+            <label for="checkAll" class="form-check-label">
+                Select All
+            </label>
+        </div>
+        <div class="select-action" style="margin-left:16px">
+            <select name="action" id="select-action">
+                <option value="empty">--Select Action--</option>
+                <option value="force_delete">Force Delete</option>
+                <option value="restore">Restore</option>
+            </select>
+        </div>
+        <div class="form-handle-multiple" style="margin-left:16px">
+            <button disabled id="handleMultipleCourses" class="btn btn-primary btn-sm">Action</button>
+        </div>
+    </div>
     <table class="table mt-16">
         <thead>
         <tr>
+            <th scope="col"></th>
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">CreatedAt</th>
@@ -15,9 +34,13 @@
         </tr>
         </thead>
         <tbody>
+        <form action=""></form> <!-- Help to form of restore handle-->
         {{#each courses}}
             <tr>
-                <th scope="row">{{sum @index 1}}</th>
+                <th scope="row">
+                    <input type="checkbox" name="courseIds[]" value="{{this._id}}">
+                </th>
+                <td>{{sum @index 1}}</td>
                 <td>{{this.name}}</td>
                 <td>{{this.createdAt}}</td>
                 <td>
@@ -28,31 +51,35 @@
                 </td>
             </tr>
 
-            <!-- Modal delete-->
+            <!--Modal delete course-->
             <div class="modal fade" id="modal-delete-{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Delete this course !</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Do you want to delete this course? <strong>This action can't restore !!!</strong>
-                        </div>
-                        <div class="modal-footer">
-                            <form method="POST" action="/courses/{{this._id}}/force?_method=DELETE">
-                                <button type="submit" class="btn btn-danger" >Delete</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                            </form>
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete this course !</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Do you want to delete this course? <strong>This action can't restore !!!</strong>
+                            </div>
+                            <div class="modal-footer">
+                                <form method="POST" action="/courses/{{this._id}}/force?_method=DELETE">
+                                    <button type="submit" class="btn btn-danger" >Delete</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         {{else}}
             <td colspan="5" class="text-center">Trash courses is empty! <a href="/me/stored/courses">My courses</a></td>
         {{/each}}
         </tbody>
     </table>
-</div>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/handleMultipleCourseSelection.js"></script>

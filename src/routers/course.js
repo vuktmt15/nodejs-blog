@@ -12,5 +12,6 @@ courseRoute.patch('/:id/restore', CourseController.restore)
 courseRoute.delete('/:id', CourseController.destroy)
 courseRoute.delete('/:id/force', CourseController.forceDestroy)
 courseRoute.get('/:slug', CourseController.show)
+courseRoute.post('/handle-multiple-courses', CourseController.handleMultipleCourses)
 
 module.exports = courseRoute
