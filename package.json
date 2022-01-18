@@ -19,11 +19,13 @@
   },
   "homepage": "https://github.com/vuktmt15/nodejs-f8-blog#readme",
   "dependencies": {
+    "date-format": "^4.0.2",
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
     "method-override": "^3.0.0",
     "mongoose": "^6.1.5",
     "mongoose-delete": "^0.5.4",
+    "mongoose-sequence": "^5.3.1",
     "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {

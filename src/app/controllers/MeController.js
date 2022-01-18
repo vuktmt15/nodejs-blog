@@ -1,12 +1,14 @@
 const Course = require('../models/Course.js')
-const {mutilpleMongooseToObject, mongooseToObject} = require('../../untils/mongoose')
+const {mutilpleMongooseToObject, mongooseToObject, formatCreatedAtInObject} = require('../../untils/mongoose')
 
 class MeController {
     storedCourses(req, res, next) {
         Promise.all([Course.find({}), Course.countDocumentsDeleted()])
             .then(([courses, deletedCourses]) => {
+                courses = mutilpleMongooseToObject(courses)
+                courses = formatCreatedAtInObject(courses)
                 res.render('me/stored_courses', {
-                    courses: mutilpleMongooseToObject(courses),
+                    courses,
                     deletedCourses
             })})
             .catch(next)
@@ -16,6 +18,7 @@ class MeController {
         Course.findDeleted({})
             .then(courses => {
                 courses = mutilpleMongooseToObject(courses)
+                courses = formatCreatedAtInObject(courses)
                 res.render('me/trash_courses', {courses})
             })
             .catch(next)

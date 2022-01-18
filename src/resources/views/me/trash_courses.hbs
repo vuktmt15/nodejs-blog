@@ -28,7 +28,7 @@
         <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col">#</th>
+            <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">CreatedAt</th>
             <th scope="col">Action</th>
@@ -41,7 +41,7 @@
                 <th scope="row">
                     <input type="checkbox" name="courseIds[]" value="{{this._id}}">
                 </th>
-                <td>{{sum @index 1}}</td>
+                <td>{{this._id}}</td>
                 <td>{{this.name}}</td>
                 <td>{{this.createdAt}}</td>
                 <td>
