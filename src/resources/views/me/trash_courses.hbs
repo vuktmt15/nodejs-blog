@@ -23,7 +23,8 @@
             <button disabled id="handleMultipleCourses" class="btn btn-primary btn-sm">Action</button>
         </div>
     </div>
-    <table class="table mt-16">
+    <br>
+    <table class="table mt-16" id="table-use-datatable">
         <thead>
         <tr>
             <th scope="col"></th>
@@ -83,3 +84,13 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/handleMultipleCourseSelection.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#table-use-datatable').DataTable({
+            "columnDefs": [{
+                "targets": [0,1,4],
+                "orderable": false
+            }]
+        });
+    });
+</script>
